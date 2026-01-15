@@ -1,0 +1,73 @@
+package com.manubp.ecommerce.model;
+
+import java.util.Date;
+
+public class Orden {
+	
+	private Integer id;
+	private String numero;
+	private Double total;
+	private Date fechaCreacion;
+	private Date fechaRecibida;
+	
+	public Orden() {}
+	
+	public Orden(Integer id, String numero, Double total, Date fechaCreacion, Date fechaRecibida) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.total = total;
+		this.fechaCreacion = fechaCreacion;
+		this.fechaRecibida = fechaRecibida;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Date getFechaRecibida() {
+		return fechaRecibida;
+	}
+
+	public void setFechaRecibida(Date fechaRecibida) {
+		this.fechaRecibida = fechaRecibida;
+	}
+
+	@Override
+	public String toString() {
+		return "Orden [id=" + id + ", numero=" + numero + ", total=" + total + ", fechaCreacion=" + fechaCreacion
+				+ ", fechaRecibida=" + fechaRecibida + "]";
+	}
+	
+	
+	
+
+}
