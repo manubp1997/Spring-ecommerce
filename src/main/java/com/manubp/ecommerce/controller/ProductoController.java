@@ -54,6 +54,7 @@ public class ProductoController {
 	}
 	
 	
+	// Este metodo selecciona un producto por su id y lo muestra en un formulario para editarlo
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model) {
 		
@@ -68,10 +69,20 @@ public class ProductoController {
 		return "productos/edit";
 	}
 	
+	// Este metodo actualiza el producto en la base de datos
 	@PostMapping("/update")
 	public String update(Producto producto) {
 		
 		productoService.update(producto);
+		
+		return "redirect:/productos";
+	}
+	
+	// Este metodo elimina un producto por su id
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+		
+		productoService.delete(id);
 		
 		return "redirect:/productos";
 	}
