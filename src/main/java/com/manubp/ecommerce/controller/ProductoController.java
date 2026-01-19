@@ -60,15 +60,7 @@ public class ProductoController {
 			String nombreImagen = uploadFileService.saveImage(file);
 			producto.setImagen(nombreImagen);
 		} else {
-			if(file.isEmpty()) { // Cuando no se cambia la imagen al editar
-				Producto p = new Producto();
-				p = productoService.get(producto.getId()).get();
-				producto.setImagen(p.getImagen());
-			}else {
-				// Cuando se cambia la imagen al editar
-				String nombreImagen = uploadFileService.saveImage(file);
-				producto.setImagen(nombreImagen);
-			}
+			
 		}
 		
 		
@@ -95,7 +87,27 @@ public class ProductoController {
 	
 	// Este metodo actualiza el producto en la base de datos
 	@PostMapping("/update")
-	public String update(Producto producto) {
+	public String update(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {
+		
+		Producto p = new Producto();
+		p = productoService.get(producto.getId()).get();
+		
+		if(file.isEmpty()) { // Cuando no se cambia la imagen al editar
+
+			producto.setImagen(p.getImagen());
+		}else {
+			// Cuando se cambia la imagen al editar
+
+			// Eliminar imagen cuando no es la default				
+			if(!p.getImagen().equals("default.jpg")) {
+				uploadFileService.deleteImage(p.getImagen());
+			}
+			
+			String nombreImagen = uploadFileService.saveImage(file);
+			producto.setImagen(nombreImagen);
+		}
+		
+		producto.setUsuario(p.getUsuario());
 		
 		productoService.update(producto);
 		
@@ -105,6 +117,13 @@ public class ProductoController {
 	// Este metodo elimina un producto por su id
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id) {
+		
+		Producto p = new Producto();
+		p = productoService.get(id).get();
+		// Eliminar imagen cuando no es la default				
+		if(!p.getImagen().equals("default.jpg")) {
+			uploadFileService.deleteImage(p.getImagen());
+		}
 		
 		productoService.delete(id);
 		
