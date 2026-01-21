@@ -6,8 +6,11 @@ import com.manubp.ecommerce.model.Orden;
 
 public interface IOrdenService {
 	
+	// Listar todas las ordenes
 	List<Orden> findAll();
 
 	//Guardar una orden 
 	Orden save(Orden orden);
+	
+	String generarNumeroOrden();
 }

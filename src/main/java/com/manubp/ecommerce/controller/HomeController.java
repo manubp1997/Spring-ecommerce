@@ -1,6 +1,7 @@
 package com.manubp.ecommerce.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ import com.manubp.ecommerce.model.DetalleOrden;
 import com.manubp.ecommerce.model.Orden;
 import com.manubp.ecommerce.model.Producto;
 import com.manubp.ecommerce.model.Usuario;
+import com.manubp.ecommerce.service.IDetalleOrdenService;
+import com.manubp.ecommerce.service.IOrdenService;
 import com.manubp.ecommerce.service.IUsuarioService;
 import com.manubp.ecommerce.service.ProductoService;
 
@@ -31,6 +34,12 @@ public class HomeController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
+	
+	@Autowired
+	private IDetalleOrdenService detalleOrdenService;
 	
 	//variable para almacenar los detalles de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
@@ -149,6 +158,33 @@ public class HomeController {
 		model.addAttribute("usuario", usuario);
 		
 		return "usuario/resumenorden";
+	}
+	
+	
+	//guardar la orden y los detalles de la orden
+	@GetMapping("/saveOrder")
+	public String saveOrder() {
+		
+		Date fechaCreacion = new Date();
+		orden.setFechaCreacion(fechaCreacion);
+		orden.setNumero(ordenService.generarNumeroOrden());
+		
+		//Usuario temporal, luego se debe cambiar por el usuario logueado
+		Usuario usuario = usuarioService.findById(1).get();
+		orden.setUsuario(usuario);
+		ordenService.save(orden);
+		
+		//guardar los detalles de la orden
+		for(DetalleOrden dt : detalles) {
+			dt.setOrden(orden);
+			detalleOrdenService.save(dt);
+		}
+		
+		//limpiar las variables de la lista y de la orden
+		orden = new Orden();
+		detalles.clear();
+		
+		return "redirect:/";
 	}
 
 }
