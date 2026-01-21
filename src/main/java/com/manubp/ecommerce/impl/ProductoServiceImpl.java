@@ -1,4 +1,4 @@
-package com.manubp.ecommerce.service;
+package com.manubp.ecommerce.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.manubp.ecommerce.model.Producto;
 import com.manubp.ecommerce.repository.IProductoRepository;
+import com.manubp.ecommerce.service.ProductoService;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {

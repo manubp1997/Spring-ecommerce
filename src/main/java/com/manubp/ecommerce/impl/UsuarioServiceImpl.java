@@ -1,4 +1,4 @@
-package com.manubp.ecommerce.service;
+package com.manubp.ecommerce.impl;
 
 import java.util.Optional;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.manubp.ecommerce.model.Usuario;
 import com.manubp.ecommerce.repository.IUsuarioRepository;
+import com.manubp.ecommerce.service.IUsuarioService;
 
 @Service
 public class UsuarioServiceImpl implements IUsuarioService {
