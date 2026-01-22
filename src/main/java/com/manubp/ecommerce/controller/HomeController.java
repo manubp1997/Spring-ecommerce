@@ -26,6 +26,8 @@ import com.manubp.ecommerce.service.IOrdenService;
 import com.manubp.ecommerce.service.IUsuarioService;
 import com.manubp.ecommerce.service.ProductoService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -53,7 +55,9 @@ public class HomeController {
 
 	// mapeo de la pagina principal
 	@GetMapping("")
-	public String home(Model model) {
+	public String home(Model model, HttpSession session) {
+		
+		log.info("Sesion del usuario: {}", session.getAttribute("idusuario"));
 
 		model.addAttribute("productos", productoService.findAll());
 
@@ -152,9 +156,10 @@ public class HomeController {
 
 	// formularo de envio de la orden
 	@GetMapping("/order")
-	public String order(Model model) {
+	public String order(Model model, HttpSession session) {
 
-		Usuario usuario = usuarioService.findById(1).get();
+		// obtener datos del usuario
+		Usuario usuario = usuarioService.findById( Integer.parseInt(session.getAttribute("idusuario").toString()) ).get();
 
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
@@ -165,14 +170,14 @@ public class HomeController {
 
 	// guardar la orden y los detalles de la orden
 	@GetMapping("/saveOrder")
-	public String saveOrder() {
+	public String saveOrder(HttpSession session) {
 
 		Date fechaCreacion = new Date();
 		orden.setFechaCreacion(fechaCreacion);
 		orden.setNumero(ordenService.generarNumeroOrden());
 
-		// Usuario temporal, luego se debe cambiar por el usuario logueado
-		Usuario usuario = usuarioService.findById(1).get();
+		// obtener el usuario que realiza la orden
+		Usuario usuario = usuarioService.findById( Integer.parseInt(session.getAttribute("idusuario").toString()) ).get();
 		orden.setUsuario(usuario);
 		ordenService.save(orden);
 
