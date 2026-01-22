@@ -29,17 +29,21 @@ public class UsuarioController {
 		return "usuario/registro";
 	}
 	
+	// Método para guardar un nuevo usuario
 	@PostMapping("/save")
 	public String save(Usuario usuario) {
 		
 		logger.info("Usuario registro: {}" + usuario);
 		
 		usuario.setTipo("USER");
-		usuarioService.save(usuario);
-		
-		
+		usuarioService.save(usuario);		
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "usuario/login";
 	}
 
 }
