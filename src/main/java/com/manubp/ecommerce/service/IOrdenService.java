@@ -1,6 +1,7 @@
 package com.manubp.ecommerce.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.manubp.ecommerce.model.Orden;
 import com.manubp.ecommerce.model.Usuario;
@@ -16,4 +17,6 @@ public interface IOrdenService {
 	String generarNumeroOrden();
 	
 	List<Orden> findByUsuarioId(Usuario usuario);
+
+	Optional<Orden> findById(Integer id);
 }

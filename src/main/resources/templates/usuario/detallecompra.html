@@ -23,37 +23,51 @@
 
 	<!-- Navigation -->
 	<div th:insert="~{usuario/template_usuario.html::header}" th:if="${sesion==null}"></div>
-	
+
 	<div th:insert="~{usuario/template_usuario.html::header-user}" th:unless="${sesion==null}"></div>
 
-	
 	<!-- Page Content -->
 	<div class="container">
 
-		<!-- Jumbotron Header -->
-		<header class="jumbotron my-4">
-			<h1 class="display-3">Bienvenido a Spring Ecommerce 2021</h1>
-			<p class="lead">Tu tienda de productos en Línea</p>
-		</header>
 
-		<!-- Page Features -->
-		<div class="row text-center">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			Spring eCommerce <small>Detalles</small>
+		</h1>
 
-			<div class="col-lg-3 col-md-6 mb-4" th:each="producto : ${productos}">
-				<div class="card h-100">
-					<img class="card-img-top" th:src="@{/images/{img} (img=${producto.imagen})}" alt="">
-					<div class="card-body">
-						<p class="card-text" th:text="${producto.nombre}"></p>
-					</div>
-					<div class="card-footer">
-						<a th:href="@{/productohome/{id} (id=${producto.id})}" class="btn btn-success">Ver producto</a>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item"><a th:href="@{/usuario/compras}">Compras</a></li>
+			<li class="breadcrumb-item active">Detalle de Compra</li>
+		</ol>
+
+		<!-- Blog Post -->
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">Cantidad</th>
+									<th scope="col">Producto</th>
+									<th scope="col">Precio</th>
+									<th scope="col">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="detalle:${detalles}">
+									<td th:text="${detalle.cantidad}"></td>
+									<td th:text="${detalle.nombre}"></td>
+									<td th:text="${detalle.precio}"></td>
+									<td th:text="${detalle.total}"></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<!-- /.row -->
-
 	</div>
 	<!-- /.container -->
 
@@ -63,6 +77,7 @@
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
 
 </body>
 
