@@ -48,7 +48,7 @@
 			</div>
 		</nav>
 	</div>
-	
+
 	<!-- Navigation -->
 
 	<div th:fragment="header-user">
@@ -58,8 +58,8 @@
 				<a class="navbar-brand" th:href="@{/}">Spring eCommerce</a>
 
 				<form class="form-inline my-2 my-lg-0" method="post" th:action="@{/search}">
-					<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="nombre"
-						autocomplete="off">
+					<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search"
+						name="nombre" autocomplete="off">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
 				</form>
 
@@ -74,6 +74,8 @@
 								id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false"> USER </a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a>
+
 								<a class="dropdown-item" th:href="@{/getCart}">Carrito</a>
 							</div>
 						</li>
@@ -86,7 +88,7 @@
 
 
 	<!-- Footer -->
-	<div th:fragment="footer"> 
+	<div th:fragment="footer">
 		<footer class="py-5 bg-dark">
 			<div class="container">
 				<p class="m-0 text-center text-white">Copyright &copy; Spring eCommerce 2021</p>
