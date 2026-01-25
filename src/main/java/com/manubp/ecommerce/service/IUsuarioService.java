@@ -1,10 +1,13 @@
 package com.manubp.ecommerce.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.manubp.ecommerce.model.Usuario;
 
 public interface IUsuarioService {
+	
+	List<Usuario> findAll();
 	
 	Optional<Usuario> findById(Integer id);
 	
